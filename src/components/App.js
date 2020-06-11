@@ -42,6 +42,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 export default function App() {
+
   return (
     <div className="ui container">
       <Router>
