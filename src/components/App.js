@@ -12,6 +12,7 @@ import Public from './Public';
 import Protected from "./Protected";
 import Login from './Login';
 import AuthButton from './AuthButton';
+import Header from './Header';
 
 
 export const fakeAuth = {
@@ -43,22 +44,24 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 export default function App() {
   return (
-    <Router>
-      <div>
-        <AuthButton />
+    <div className="ui container">
+      <Router>
+        <div>
+          <Header />
 
-        <ul>
-          <li>
-            <Link to="/public">Public Page</Link>
-          </li>
-          <li>
-            <Link to="/protected">Protected Page</Link>
-          </li>
-        </ul>
-        <Route path="/public" component={Public} />
-        <Route path="/login" component={Login} />
-        <PrivateRoute path="/protected" component={Protected} />
-      </div>
-    </Router>
+          <ul>
+            <li>
+              <Link to="/public">Public Page</Link>
+            </li>
+            <li>
+              <Link to="/protected">Protected Page</Link>
+            </li>
+          </ul>
+          <Route path="/public" component={Public} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/protected" component={Protected} />
+        </div>
+      </Router>
+    </div>
   );
 }
