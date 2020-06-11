@@ -11,6 +11,7 @@ import {
 import Public from './Public';
 import Protected from "./Protected";
 import Login from './Login';
+import AuthButton from './AuthButton';
 
 
 export const fakeAuth = {
@@ -44,6 +45,8 @@ export default function App() {
   return (
     <Router>
       <div>
+        <AuthButton />
+
         <ul>
           <li>
             <Link to="/public">Public Page</Link>
