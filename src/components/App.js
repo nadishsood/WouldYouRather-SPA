@@ -5,14 +5,13 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
 } from "react-router-dom";
 
 import Public from './Public';
 import Protected from "./Protected";
 import Login from './Login';
-import AuthButton from './AuthButton';
 import Header from './Header';
+import Home from './Home';
 
 
 export const fakeAuth = {
@@ -48,18 +47,10 @@ export default function App() {
       <Router>
         <div>
           <Header />
-
-          <ul>
-            <li>
-              <Link to="/public">Public Page</Link>
-            </li>
-            <li>
-              <Link to="/protected">Protected Page</Link>
-            </li>
-          </ul>
-          <Route path="/public" component={Public} />
-          <Route path="/login" component={Login} />
-          <PrivateRoute path="/protected" component={Protected} />
+          <PrivateRoute exact path="/" component={Home} />
+          <Route exact path="/public" component={Public} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact  path="/protected" component={Protected} />
         </div>
       </Router>
     </div>
