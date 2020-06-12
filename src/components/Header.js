@@ -2,17 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { fakeAuth } from "./App";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { signOut } from './../actions/index';
 
 class HeaderWithoutRouter extends React.Component{
     
     renderRightMenu(){
-          if(fakeAuth.isAuthenticated){
+          if(this.props.loggedInUser){
               return (
                 <React.Fragment>
-                  <p>Welcome!</p>
+                  <p>{`Welcome ${this.props.loggedInUser.name}`}</p>
                   <button
                     onClick={() => {
-                      fakeAuth.signout(() => this.props.history.push("/"));
+                      this.props.signOut();
                     }}
                   >
                     Sign out
@@ -25,7 +27,6 @@ class HeaderWithoutRouter extends React.Component{
 
     }
     render(){
-        console.log(this.props);
         return (
           <div className = "ui secondary pointing menu">
             <Link to = "/" className = "item">Home</Link>
@@ -40,6 +41,11 @@ class HeaderWithoutRouter extends React.Component{
     }
 }
 
-const Header = withRouter(HeaderWithoutRouter);
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.auth.user
+  };
+};
 
-export default Header;
+const Header = withRouter(HeaderWithoutRouter);
+export default connect(mapStateToProps, {signOut})(Header);

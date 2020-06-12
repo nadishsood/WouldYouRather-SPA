@@ -8,12 +8,25 @@ import {
 import * as server from "./../database/_DATA";
 
 
-export const signIn = userId => {
-  return {
-    type: SIGN_IN,
-    payload: userId
-  };
-};
+
+// export const signIn = (user, redirectTo) => {
+//   return {
+//     type: SIGN_IN,
+//     payload: {user, redirectTo}
+//   };
+
+
+//   // history.push("${redirectTo}");
+
+// };
+
+export const signIn = (user, redirectTo) =>{
+ return async function(dispatch){
+  await dispatch({type: SIGN_IN, payload:{user, redirectTo}});
+  // history.push("/protected")
+ }
+}
+
 
 export const signOut = () => {
   return {

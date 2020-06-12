@@ -3,42 +3,12 @@ import { fakeAuth } from './App';
 import { Redirect }from "react-router-dom";
 import { connect } from 'react-redux';
 import { fetchUsers } from './../actions';
+import { signIn } from './../actions';
 
 import { Field, reduxForm } from "redux-form";
 import DropdownList from "react-widgets/lib/DropdownList";
 import "react-widgets/dist/css/react-widgets.css";
 
-
-
-
-// class Login extends React.Component{
-//     state={
-//         redirectToReferrer: false
-//     }
-//     login=()=>{
-//         fakeAuth.authenticate(()=>{
-//             this.setState(()=>({
-//                 redirectToReferrer: true
-//             }))
-//         })
-//     }
-//     render(){
-//         const { from } = this.props.location.state || {from: {pathname: '/'}}
-//         const { redirectToReferrer } = this.state;
-//         if (redirectToReferrer === true) {
-//           return <Redirect to={from} />
-
-//         }
-//         return(
-//         <div>
-//           <p>You must log in to view the page</p>
-//           <button onClick={this.login}>Log in</button>
-//         </div>
-//         )
-//     }
-
-        
-//     }
 
 const renderDropdownList = ({ input, data, valueField, textField }) => (
   <DropdownList
@@ -52,46 +22,50 @@ const renderDropdownList = ({ input, data, valueField, textField }) => (
 
 class Login extends React.Component{
     
-colors = [ { color: 'Red', value: 'ff0000' },
-  { color: 'Green', value: '00ff00' },
-  { color: 'Blue', value: '0000ff' } ]
 
-  onSubmit=(formValues)=>{
-    // console.dir(formValues);
-  }
+  onSubmit=(formValue)=>{
+      const redirectTo= this.props.location.state.from.pathname;
+      this.props.signIn(formValue.user, redirectTo);
+    }
 
     componentDidMount(){
         this.props.fetchUsers();
     }
     render(){
+     
+      if(this.props.loggedInUser){
+        return <Redirect to= {this.props.location.state.from.pathname} />
+      }
        const { handleSubmit, pristine, reset, submitting } = this.props;
 
         return (
-          <form onSubmit={handleSubmit(this.onSubmit)}>
-            <div>
-              <label>Select user</label>
-              <Field
-                name="user"
-                component={renderDropdownList}
-                data={this.props.users}
-                valueField="id"
-                textField="name"
-              />
-            </div>
-            <div>
-              <button type="submit" disabled={submitting}>
-                Submit
-              </button>
-              
-            </div>
-          </form>
+          <div className ="ui container">
+            <form onSubmit={handleSubmit(this.onSubmit)}>
+              <div>
+                <label>Login as a user: </label>
+                <Field
+                  name="user"
+                  component={renderDropdownList}
+                  data={this.props.users}
+                  valueField="id"
+                  textField="name"
+                />
+              </div>
+              <div>
+                <button type="submit" className="ui green button">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         );
     }
 }
 
 const mapStateToProps = (state) =>{
     return{
-        users: Object.values(state.users)
+        users: Object.values(state.users), 
+        loggedInUser: state.auth.user
     }
 }
 
@@ -100,5 +74,8 @@ Login = reduxForm({
 })(Login);
 
 export default connect(mapStateToProps, {
-    fetchUsers
+    fetchUsers, 
+    signIn
 })(Login);
+
+
