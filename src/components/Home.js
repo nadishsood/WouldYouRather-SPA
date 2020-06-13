@@ -41,11 +41,19 @@ class Home extends React.Component {
               }
             
           }
-        
-      
     }
     console.dir(`ANSWERED: ${JSON.stringify(answeredQs)}`);
     console.dir(`un: ${JSON.stringify(unAnsweredQs)}`);
+
+    //sort the question lists 
+  answeredQs.sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1));
+  unAnsweredQs.sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1));
+  
+  console.dir(`ANSWERED: ${JSON.stringify(answeredQs)}`);
+  console.dir(`un: ${JSON.stringify(unAnsweredQs)}`);
+
+
+
 
     if(activeList === "Unanswered Questions"){
       return this.renderQuestionList(unAnsweredQs);

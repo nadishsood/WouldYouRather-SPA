@@ -1,14 +1,22 @@
 import React from "react";
+import  {connect} from 'react-redux'; 
 
 class QuestionCard extends React.Component {
 
+    getAuthor(){
+        let author = this.props.question.author;
+        return this.props.users[author]["name"];
+    }
+
     render(){
-        console.log("hhiii");
+        const question = this.props.question;
+        let author = this.getAuthor();
+        console.log(this.props);
         return (
         <div className="ui card">
             <div className="content">
             <img className="right floated ui mini image" src="" />
-            <div className="header">Elliot Fu asks</div>
+            <div className="header">{author} asks: </div>
             <div className="meta">Would you rather:</div>
             <div className="description">...write js or.....</div>
             </div>
@@ -22,5 +30,12 @@ class QuestionCard extends React.Component {
     }
     
 }
+const mapStateToProps=(state)=>{
+    return {
+        users: state.users
+    }
+}
 
-export default QuestionCard;
+export default connect(mapStateToProps, {
+    
+})(QuestionCard);
