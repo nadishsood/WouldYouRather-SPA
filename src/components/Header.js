@@ -30,8 +30,8 @@ class HeaderWithoutRouter extends React.Component{
         return (
           <div className = "ui secondary pointing menu">
             <Link to = "/" className = "item">Home</Link>
-            <Link to = "/" className = "item">New Question</Link>
-            <Link to = "/" className = "item">Leader Board</Link>
+            <Link to = "/add" className = "item">New Question</Link>
+            <Link to = "/leaderboard" className = "item">Leader Board</Link>
             
             <div className = "right menu">
                 {this.renderRightMenu()}

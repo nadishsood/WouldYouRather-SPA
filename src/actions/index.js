@@ -1,7 +1,9 @@
 import {
   SIGN_IN,
   SIGN_OUT,
-  FETCH_USERS
+  FETCH_USERS, 
+  FETCH_QUESTIONS, 
+  SET_ACTIVE_LIST
 
 } from "./types";
 
@@ -38,3 +40,15 @@ export const fetchUsers = () => async dispatch =>{
     const response = await server._getUsers();
     dispatch({ type: FETCH_USERS, payload: response });
 }
+
+export const fetchQuestions = () => async dispatch => {
+  const response = await server._getQuestions();
+  dispatch({ type: FETCH_QUESTIONS, payload: response });
+};
+
+export const setActiveList = (selected) => {
+  return {
+    type: SET_ACTIVE_LIST, 
+    payload: selected
+  };
+};

@@ -3,7 +3,6 @@ import * as data from './../database/_DATA';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
 
@@ -15,20 +14,6 @@ import Login from './Login';
 import Header from './Header';
 import Home from './Home';
 import { connect } from "react-redux";
-
-
-// export const fakeAuth = {
-//   isAuthenticated: false,
-//   authenticate(cb) {
-//     this.isAuthenticated = true;
-//     setTimeout(cb, 100);
-//   },
-//   signout(cb) {
-//     this.isAuthenticated = false;
-//     setTimeout(cb, 100);
-//   }
-// };
-
 
 
 const PrivateRoute = ({ component: Component, loggedInUser: user, ...rest }) => {
@@ -59,7 +44,6 @@ return (
       <div>
         <Header />
         <PrivateRoute exact path="/" component={Home} loggedInUser={this.props.loggedInUser}/>
-        <Route exact path="/public" component={Public} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/add" loggedInUser={this.props.loggedInUser}  component={NewQuestion} />
         <PrivateRoute exact path="/leaderboard" loggedInUser={this.props.loggedInUser}  component={LeaderBoard} />
