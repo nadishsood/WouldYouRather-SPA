@@ -15,10 +15,16 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.fetchQuestions();
   }
+  
+  renderQuestionList=(questions)=>{
+    return questions.map((question)=>{
+      return <QuestionCard question={question}/>
+    })
+}
 
   renderQuestions = activeList => {
-    let unAnsweredQs = {};
-    let answeredQs = {};
+    let unAnsweredQs = [];
+    let answeredQs = [];
    
       
         if (this.props.questions !== null) {
@@ -27,10 +33,11 @@ class Home extends React.Component {
                 this.props.questions[qID]["optionOne"]["votes"].length !== 0 ||
                 this.props.questions[qID]["optionTwo"]["votes"].length !== 0
               ) {
-                answeredQs[qID] = this.props.questions[qID];
+                // answeredQs[qID] = this.props.questions[qID];
+                answeredQs.push(this.props.questions[qID]);
               }else{
-                unAnsweredQs[qID] = this.props.questions[qID];
-
+                // unAnsweredQs[qID] = this.props.questions[qID];
+                unAnsweredQs.push(this.props.questions[qID]);
               }
             
           }
@@ -40,8 +47,12 @@ class Home extends React.Component {
     console.dir(`ANSWERED: ${JSON.stringify(answeredQs)}`);
     console.dir(`un: ${JSON.stringify(unAnsweredQs)}`);
 
+    if(activeList === "Unanswered Questions"){
+      return this.renderQuestionList(unAnsweredQs);
+    }else{
+      return this.renderQuestionList(answeredQs);
+    }
 
-    return <div></div>;
   };
 
   render() {
@@ -60,7 +71,7 @@ class Home extends React.Component {
             onClick={this.handleItemClick}
           />
         </Menu>
-        {this.renderQuestions()}
+        {this.renderQuestions(this.props.activeList)}
       </div>
     );
   }
