@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import { createQuestion } from './../actions';
 
-// JSON.stringify()
+import { withRouter } from "react-router-dom";
 
 
 class NewQuestion extends React.Component {
@@ -18,12 +18,14 @@ class NewQuestion extends React.Component {
       </div>
     );
   };
-  onSubmit = formValues => {
-      this.props.createQuestion({
+  onSubmit = async formValues => {
+      await this.props.createQuestion({
           author:this.props.userId,
           optionOneText:formValues.optionOne,
           optionTwoText: formValues.optionTwo
       })
+      this.props.history.push("/");
+      
   };
   renderError = meta => {
     const error = meta.error;
@@ -38,6 +40,7 @@ class NewQuestion extends React.Component {
   };
 
   render() {
+      console.log(this.props);
       console.log(this.props.createdQuestion);
     return (
       <div>
@@ -86,6 +89,8 @@ const mapStateToProps=(state)=>{
    form: "newQuestionCreate",
    validate
  })(NewQuestion);
+
+ NewQuestion = withRouter(NewQuestion);
 
 export default connect(mapStateToProps, { createQuestion })(NewQuestion);
 

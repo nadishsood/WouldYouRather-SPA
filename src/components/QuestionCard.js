@@ -9,15 +9,17 @@ class QuestionCard extends React.Component {
     }
 
     render(){
-        const question = this.props.question;
+        console.log(this.props.question);
+        const question = this.props.question.optionOne.text; 
         let author = this.getAuthor();
+        
         return (
         <div className="ui card">
             <div className="content">
             <img className="right floated ui mini image" src="" />
             <div className="header">{author} asks: </div>
             <div className="meta">Would you rather:</div>
-            <div className="description">...write js or.....</div>
+            <div className="description">....{question} or ...</div>
             </div>
             <div className="extra content">
             <div className="ui button">

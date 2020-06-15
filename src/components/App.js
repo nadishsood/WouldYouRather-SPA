@@ -40,11 +40,25 @@ return (
     <Router>
       <div>
         <Header />
-        <PrivateRoute exact path="/" component={Home} loggedInUser={this.props.loggedInUser}/>
+        <PrivateRoute
+          exact
+          path="/"
+          component={Home}
+          loggedInUser={this.props.loggedInUser}
+        />
         <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/add" loggedInUser={this.props.loggedInUser}  component={NewQuestion} />
-        <PrivateRoute exact path="/leaderboard" loggedInUser={this.props.loggedInUser}  component={LeaderBoard} />
-
+        <PrivateRoute
+          exact
+          path="/add"
+          loggedInUser={this.props.loggedInUser}
+          component={NewQuestion}
+        />
+        <PrivateRoute
+          exact
+          path="/leaderboard"
+          loggedInUser={this.props.loggedInUser}
+          component={LeaderBoard}
+        />
       </div>
     </Router>
   </div>

@@ -11,22 +11,9 @@ import {
 import * as server from "./../database/_DATA";
 
 
-
-// export const signIn = (user, redirectTo) => {
-//   return {
-//     type: SIGN_IN,
-//     payload: {user, redirectTo}
-//   };
-
-
-//   // history.push("${redirectTo}");
-
-// };
-
 export const signIn = (user, redirectTo) =>{
  return async function(dispatch){
   await dispatch({type: SIGN_IN, payload:{user, redirectTo}});
-  // history.push("/protected")
  }
 }
 
@@ -61,4 +48,6 @@ export const createQuestion = (question) => async dispatch => {
    const response = await server._saveQuestion(question);
    
   dispatch({ type: CREATE_QUESTION, payload: response });
+
+  
 };
