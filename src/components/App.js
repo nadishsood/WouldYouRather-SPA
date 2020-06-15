@@ -1,12 +1,10 @@
 import React from 'react';
-import * as data from './../database/_DATA';
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
 } from "react-router-dom";
 
-import Public from './Public';
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 
@@ -37,7 +35,6 @@ const PrivateRoute = ({ component: Component, loggedInUser: user, ...rest }) => 
 
 class App extends React.Component{
 render(){
-  console.log(this.props.loggedInUser);
 return (
   <div className="ui container">
     <Router>

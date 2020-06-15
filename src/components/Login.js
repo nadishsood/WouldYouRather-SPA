@@ -1,5 +1,4 @@
 import React from 'react';
-import { fakeAuth } from './App';
 import { Redirect }from "react-router-dom";
 import { connect } from 'react-redux';
 import { fetchUsers } from './../actions';
@@ -21,7 +20,6 @@ const renderDropdownList = ({ input, data, valueField, textField }) => (
 );
 
 class Login extends React.Component{
-    
 
   onSubmit=(formValue)=>{
       const redirectTo= this.props.location.state.from.pathname;
@@ -36,7 +34,7 @@ class Login extends React.Component{
       if(this.props.loggedInUser){
         return <Redirect to= {this.props.location.state.from.pathname} />
       }
-       const { handleSubmit, pristine, reset, submitting } = this.props;
+       const { handleSubmit } = this.props;
 
         return (
           <div className ="ui container">

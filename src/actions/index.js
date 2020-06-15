@@ -3,7 +3,8 @@ import {
   SIGN_OUT,
   FETCH_USERS, 
   FETCH_QUESTIONS, 
-  SET_ACTIVE_LIST
+  SET_ACTIVE_LIST, 
+  CREATE_QUESTION
 
 } from "./types";
 
@@ -51,4 +52,13 @@ export const setActiveList = (selected) => {
     type: SET_ACTIVE_LIST, 
     payload: selected
   };
+};
+
+
+
+export const createQuestion = (question) => async dispatch => {
+  console.log(question);
+   const response = await server._saveQuestion(question);
+   
+  dispatch({ type: CREATE_QUESTION, payload: response });
 };

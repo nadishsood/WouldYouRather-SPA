@@ -11,7 +11,6 @@ class QuestionCard extends React.Component {
     render(){
         const question = this.props.question;
         let author = this.getAuthor();
-        console.log(this.props);
         return (
         <div className="ui card">
             <div className="content">

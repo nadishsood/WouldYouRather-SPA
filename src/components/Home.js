@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchQuestions } from "./../actions"; 
 import { setActiveList } from "./../actions"; 
+import { Link } from 'react-router-dom';
 
 
 import { Input, Menu } from "semantic-ui-react";
@@ -18,7 +19,7 @@ class Home extends React.Component {
   
   renderQuestionList=(questions)=>{
     return questions.map((question)=>{
-      return <QuestionCard question={question}/>
+      return <QuestionCard key={question.id} question={question}/>
     })
 }
 
@@ -42,18 +43,11 @@ class Home extends React.Component {
             
           }
     }
-    console.dir(`ANSWERED: ${JSON.stringify(answeredQs)}`);
-    console.dir(`un: ${JSON.stringify(unAnsweredQs)}`);
-
-    //sort the question lists 
+  
+    //sort the question lists, most recent first
   answeredQs.sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1));
   unAnsweredQs.sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1));
   
-  console.dir(`ANSWERED: ${JSON.stringify(answeredQs)}`);
-  console.dir(`un: ${JSON.stringify(unAnsweredQs)}`);
-
-
-
 
     if(activeList === "Unanswered Questions"){
       return this.renderQuestionList(unAnsweredQs);
@@ -64,9 +58,9 @@ class Home extends React.Component {
   };
 
   render() {
-    console.dir(this.props.activeList);
     return (
       <div>
+        <Link to="/add">go to create new</Link>
         <Menu secondary>
           <Menu.Item
             name="Unanswered Questions"
