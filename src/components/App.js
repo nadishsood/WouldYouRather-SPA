@@ -11,6 +11,8 @@ import LeaderBoard from "./LeaderBoard";
 import Login from './Login';
 import Header from './Header';
 import Home from './Home';
+import QuestionDetail from "./QuestionDetail";
+
 import { connect } from "react-redux";
 
 
@@ -58,6 +60,12 @@ return (
           path="/leaderboard"
           loggedInUser={this.props.loggedInUser}
           component={LeaderBoard}
+        />
+        <PrivateRoute
+          exact
+          path="/questions/:id"
+          loggedInUser={this.props.loggedInUser}
+          component={QuestionDetail}
         />
       </div>
     </Router>
