@@ -4,7 +4,8 @@ import {
   FETCH_USERS, 
   FETCH_QUESTIONS, 
   SET_ACTIVE_LIST, 
-  CREATE_QUESTION
+  CREATE_QUESTION, 
+  SAVE_QUESTION_ANSWER
 
 } from "./types";
 
@@ -46,8 +47,30 @@ export const setActiveList = (selected) => {
 export const createQuestion = (question) => async dispatch => {
   console.log(question);
    const response = await server._saveQuestion(question);
+   dispatch(fetchUsers());
    
   dispatch({ type: CREATE_QUESTION, payload: response });
 
-  
 };
+
+//in response to submitting a vote
+
+
+
+export const saveQuestionAnswer = (authedUser, qid, answer) => async dispatch => {
+  
+  const response = await server._saveQuestionAnswer({
+    authedUser: authedUser,
+    qid: qid,
+    answer: answer
+  });
+
+  dispatch(fetchUsers());
+  dispatch(fetchQuestions());
+
+  dispatch({ type: SAVE_QUESTION_ANSWER, payload: response });
+};
+
+
+
+

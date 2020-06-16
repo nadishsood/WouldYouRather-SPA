@@ -35,6 +35,10 @@ const PrivateRoute = ({ component: Component, loggedInUser: user, ...rest }) => 
   );
 }
 
+const NoMatchPage = () => {
+  return <h3>404 - Not found</h3>;
+};
+
 class App extends React.Component{
 render(){
 return (
@@ -67,6 +71,7 @@ return (
           loggedInUser={this.props.loggedInUser}
           component={QuestionDetail}
         />
+        <Route exact path="/404" component={NoMatchPage} />
       </div>
     </Router>
   </div>

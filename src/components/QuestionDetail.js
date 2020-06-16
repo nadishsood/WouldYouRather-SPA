@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Header, Button, Form, Radio } from "semantic-ui-react";
+import { saveQuestionAnswer } from "./../actions";
 
 class QuestionDetail extends React.Component {
   state = {
@@ -14,8 +15,8 @@ class QuestionDetail extends React.Component {
     const qID = this.props.match.params.id;
    const question = this.props.questions.questions[`${qID}`];   
     if (this.state.value !== "") {
-    //   const { user, saveQuestionAnswer } = this.props;
-    //   saveQuestionAnswer(user, question.id, this.state.value);
+      const { currentUser, saveQuestionAnswer } = this.props;
+      saveQuestionAnswer(currentUser, question.id, this.state.value);
     }
   };
 
@@ -65,9 +66,10 @@ class QuestionDetail extends React.Component {
 const mapStateToProps=(state)=>{
     return {
       questions: state.questions, 
-      currentUser: state.auth.user
+      currentUser: state.auth.user.id
     };
 }
 
 export default connect(mapStateToProps, {
+    saveQuestionAnswer
 })(QuestionDetail);

@@ -30,10 +30,23 @@ class Login extends React.Component{
         this.props.fetchUsers();
     }
     render(){
+      console.log(`from login: ${JSON.stringify(this.props)}`);
+
+      const re = /questions/;
+
      
-      if(this.props.loggedInUser){
-        return <Redirect to= {this.props.location.state.from.pathname} />
-      }
+        if (this.props.loggedInUser) {
+           if (
+             re.test(
+               this.props.location.state.from.pathname
+             )
+           ) {
+             return <Redirect to="/404" />;
+           } else {
+             return <Redirect to={this.props.location.state.from.pathname} />;
+           }
+             
+        }
        const { handleSubmit } = this.props;
 
         return (
