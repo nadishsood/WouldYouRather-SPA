@@ -1,12 +1,12 @@
 import {
   SIGN_IN,
   SIGN_OUT,
-  FETCH_USERS, 
-  FETCH_QUESTIONS, 
-  SET_ACTIVE_LIST, 
-  CREATE_QUESTION, 
-  SAVE_QUESTION_ANSWER
-
+  FETCH_USERS,
+  FETCH_QUESTIONS,
+  SET_ACTIVE_LIST,
+  CREATE_QUESTION,
+  SAVE_QUESTION_ANSWER,
+  SET_RES_OR_QUESTION
 } from "./types";
 
 import * as server from "./../database/_DATA";
@@ -19,11 +19,16 @@ export const signIn = (user, redirectTo) =>{
 }
 
 
-export const signOut = () => {
-  return {
+export const signOut = () => dispatch => {
+  dispatch(fetchUsers());
+  dispatch(fetchQuestions());
+  dispatch(setActiveList("Unanswered Questions"))
+  
+  dispatch({
     type: SIGN_OUT
-  };
+  }) 
 };
+
 
 export const fetchUsers = () => async dispatch =>{
     const response = await server._getUsers();
@@ -70,6 +75,10 @@ export const saveQuestionAnswer = (authedUser, qid, answer) => async dispatch =>
 
   dispatch({ type: SAVE_QUESTION_ANSWER, payload: response });
 };
+
+export const setResOrQuestion =(resOrQues)=>{
+  return { type: SET_RES_OR_QUESTION, payload: resOrQues };
+}
 
 
 

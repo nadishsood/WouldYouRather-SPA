@@ -31,8 +31,8 @@ class Home extends React.Component {
         if (this.props.questions !== null) {
           for (let qID in this.props.questions) {
               if (
-                this.props.questions[qID]["optionOne"]["votes"].length !== 0 ||
-                this.props.questions[qID]["optionTwo"]["votes"].length !== 0
+                this.props.questions[qID]["optionOne"]["votes"].includes(this.props.user.id)||
+                this.props.questions[qID]["optionTwo"]["votes"].includes(this.props.user.id) 
               ) {
                 // answeredQs[qID] = this.props.questions[qID];
                 answeredQs.push(this.props.questions[qID]);
@@ -82,12 +82,14 @@ class Home extends React.Component {
 const mapStateToProps=(state)=>{
   return{
     questions: state.questions.questions, 
-    activeList: state.questions.activeList
+    activeList: state.questions.activeList, 
+    user: state.auth.user
   }
 }
 export default connect(mapStateToProps, {
   fetchQuestions, 
-  setActiveList
+  setActiveList, 
+
 })(Home);
 
 
