@@ -19,7 +19,7 @@ class Home extends React.Component {
   
   renderQuestionList=(questions)=>{
     return questions.map((question)=>{
-      return <QuestionCard key={question.id} question={question}/>
+      return <QuestionCard key={question.id} question={question} />
     })
 }
 

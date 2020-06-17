@@ -3,6 +3,8 @@ import  {connect} from 'react-redux';
 import { thisExpression } from "@babel/types";
 import { withRouter, Redirect } from "react-router-dom";
 import { setResOrQuestion } from "./../actions";
+import { Image } from "semantic-ui-react";
+
 
 
 
@@ -54,7 +56,13 @@ class QuestionCard extends React.Component {
     return (
       <div className="ui card">
         <div className="content">
-          <img className="right floated ui mini image" src="" />
+          <Image
+            className="right floated ui mini image"
+            src={this.props.user.avatarURL}
+            size="large"
+            
+
+          />
           <div className="header">{author} asks: </div>
           <div className="meta">Would you rather:</div>
           <div className="description">....{question} or ...</div>
@@ -66,9 +74,10 @@ class QuestionCard extends React.Component {
     );
   }
 }
-const mapStateToProps=(state)=>{
+const mapStateToProps=(state, OwnProps)=>{
     return {
         users: state.users, 
+        user: state.users[OwnProps.question.author], 
         activeList: state.questions.activeList
     }
 }

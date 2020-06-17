@@ -6,7 +6,7 @@ const LeaderBoardCard = (props) =>{
     console.log(props);
     return (
       <Card>
-        <Image src="/images/avatar/large/daniel.jpg" wrapped ui={false} />
+        <Image src={props.user.avatarURL} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{props.user.name}</Card.Header>
           <Card.Description>

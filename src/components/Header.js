@@ -4,14 +4,23 @@ import { fakeAuth } from "./App";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from './../actions/index';
+import { Image } from "semantic-ui-react";
+
 
 class HeaderWithoutRouter extends React.Component{
     
     renderRightMenu(){
           if(this.props.loggedInUser){
               return (
-                <React.Fragment>
+                <div>
                   <p>{`Welcome ${this.props.loggedInUser.name}`}</p>
+                  <Image
+                    size="small"
+                    src={this.props.loggedInUser.avatarURL}
+                    floated="left"
+                    size="mini"
+                    circular
+                  />
                   <button
                     onClick={() => {
                       this.props.signOut();
@@ -19,7 +28,7 @@ class HeaderWithoutRouter extends React.Component{
                   >
                     Sign out
                   </button>
-                </React.Fragment>
+                </div>
               );
           }else{
               return <p>You are not logged in.</p>;
