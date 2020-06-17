@@ -4,32 +4,27 @@ import { Header, Button, Form, Radio } from "semantic-ui-react";
 import { saveQuestionAnswer } from "./../actions";
 import { withRouter } from 'react-router-dom';
 import { setResOrQuestion } from "./../actions";
+import YourVote from "./YourVote";
 
-
+import { fetchUsers } from "./../actions";
+import { fetchQuestions } from "./../actions";
 
 import {
   Segment,
   Progress,
-  Label, 
-  Icon
 } from "semantic-ui-react";
 
-const YourVoteLabel = () => (
-  <Label color="orange" ribbon="right" className="vote">
-    <Icon name="check circle outline" size="big" className="compact" />
-    <div style={{ float: "right" }}>
-      Your
-      <br />
-      Vote
-    </div>
-  </Label>
-);
 
 class QuestionDetail extends React.Component {
   state = {
     value: "",
     
   };
+
+  componentDidMount(){
+  this.props.fetchUsers();
+  this.props.fetchQuestions();
+  }
 
   handleChange = (e, { value }) => this.setState({ value });
 
@@ -106,7 +101,7 @@ class QuestionDetail extends React.Component {
             <Header.Subheader>Would you rather</Header.Subheader>
           </Header>
           <Segment>
-            {userVoted === "optionOne" && <YourVoteLabel />}
+            {userVoted === "optionOne" && <YourVote />}
             <p>{question.optionOne.text}</p>
             <Progress
               percent={((votesOptionOne / totalVotes) * 100).toFixed(2)}
@@ -116,7 +111,7 @@ class QuestionDetail extends React.Component {
             </Progress>
           </Segment>
           <Segment>
-            {userVoted === "optionTwo" && <YourVoteLabel />}
+            {userVoted === "optionTwo" && <YourVote />}
 
             <p>{question.optionTwo.text}</p>
             <Progress
@@ -150,5 +145,7 @@ QuestionDetail = withRouter(QuestionDetail);
 
 export default connect(mapStateToProps, {
   saveQuestionAnswer,
-  setResOrQuestion
+  setResOrQuestion,
+  fetchUsers,
+  fetchQuestions
 })(QuestionDetail);

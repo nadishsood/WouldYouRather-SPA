@@ -1,40 +1,76 @@
 import React from "react";
-import{ Link } from "react-router-dom";
 import { connect } from "react-redux";
+import LeaderBoardCard from "./LeaderBoardCard";
+import _ from 'lodash';
+
 import { fetchUsers } from "./../actions";
-import { thisExpression } from "@babel/types";
-import { statement } from "@babel/template";
 
 
-// const Leaderboard = () => {
-//   return(
-//       <div>
-//           <p>Leaderboard</p>
-//           <Link to="/add">Click to go to new question></Link>
-//       </div>
-//   )
-
-// };
 
 class LeaderBoard extends React.Component{
   componentDidMount(){
     this.props.fetchUsers();
+    
   }
-  render(){
-    console.log(this.props.users);
-    return(
-      <div></div>
-    )
+
+  renderLeaderBoard=()=>{
+    let users = this.props.users;
+   
+    let leaderBoardList = [];
+    
+    
+    for(let user in users){
+
+      
+      let questionsByUser = users[user]["questions"];
+      let n = 0;
+      let m = 0;
+
+      for(let question in questionsByUser){
+        n+=1
+      }
+      
+      let questionsAnswered = users[user]["answers"];
+      for(let answer in questionsAnswered){
+        m+=1
+      }
+
+      let user1 = _.cloneDeep(users[user]);
+     
+
+      user1.nQuestions = n;
+      user1.nAnswers = m;
+      user1.totalScore = n+m;
+      
+      leaderBoardList.push(user1);
+      
+    }
+
+    leaderBoardList = _.orderBy(leaderBoardList, ['totalScore'], ['desc']);
+
+
+    return leaderBoardList.map((user)=>{
+      return <LeaderBoardCard user={user}/>
+    })
   }
+
+    render(){
+      return(
+        <div>
+          {this.renderLeaderBoard()}
+        </div>
+      )
+    }
 }
 
 const mapStateToProps=(state)=>{
   return{
-    users: state.users
+    users: state.users, 
+    questions: state.questions.questions
   }
 }
 
 export default connect(mapStateToProps, {
-  fetchUsers
+  fetchUsers,
 })(LeaderBoard);
 
