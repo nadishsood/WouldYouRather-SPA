@@ -60,7 +60,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/add">go to create new</Link>
+        
         <Menu secondary>
           <Menu.Item
             name="Unanswered Questions"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { fakeAuth } from "./App";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -8,6 +8,7 @@ import { Image } from "semantic-ui-react";
 
 
 class HeaderWithoutRouter extends React.Component{
+  
     
     renderRightMenu(){
           if(this.props.loggedInUser){
@@ -37,16 +38,47 @@ class HeaderWithoutRouter extends React.Component{
     }
     render(){
         return (
-          <div className = "ui secondary pointing menu">
-            <Link to = "/" className = "item">Home</Link>
-            <Link to = "/add" className = "item">New Question</Link>
-            <Link to = "/leaderboard" className = "item">Leader Board</Link>
+          <div className="ui secondary pointing menu">
             
-            <div className = "right menu">
-                {this.renderRightMenu()}
-            </div>
+            <NavLink
+              to="/"
+              exact
+              className="item"
+              activeStyle={{
+                fontWeight: "bold",
+                color: "black"
+              }}
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/add"
+              className="item"
+              activeStyle={{
+                fontWeight: "bold",
+                color: "black"
+              }}
+              exact
+            >
+              New Question
+            </NavLink>
+
+            <NavLink
+              to="/leaderboard"
+              className="item"
+              activeStyle={{
+                fontWeight: "bold",
+                color: "black"
+              }}
+              exact
+            >
+              Leader Board
+            </NavLink>
+
+            <div className="right menu">{this.renderRightMenu()}</div>
           </div>
-        )
+        );
     }
 }
 
