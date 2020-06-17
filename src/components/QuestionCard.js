@@ -1,7 +1,6 @@
 import React from "react";
 import  {connect} from 'react-redux'; 
-import { thisExpression } from "@babel/types";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { setResOrQuestion } from "./../actions";
 import { Image } from "semantic-ui-react";
 

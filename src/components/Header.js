@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
-import { fakeAuth } from "./App";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from './../actions/index';
@@ -16,7 +15,7 @@ class HeaderWithoutRouter extends React.Component{
                 <div>
                   <p>{`Welcome ${this.props.loggedInUser.name}`}</p>
                   <Image
-                    size="small"
+                    
                     src={this.props.loggedInUser.avatarURL}
                     floated="left"
                     size="mini"

@@ -2,10 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchQuestions } from "./../actions"; 
 import { setActiveList } from "./../actions"; 
-import { Link } from 'react-router-dom';
 
 
-import { Input, Menu } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 import QuestionCard from "./QuestionCard";
 
 class Home extends React.Component {

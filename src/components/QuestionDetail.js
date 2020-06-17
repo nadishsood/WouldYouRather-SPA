@@ -5,6 +5,8 @@ import { saveQuestionAnswer } from "./../actions";
 import { withRouter } from 'react-router-dom';
 import { setResOrQuestion } from "./../actions";
 import YourVote from "./YourVote";
+import { Image } from "semantic-ui-react";
+
 
 import { fetchUsers } from "./../actions";
 import { fetchQuestions } from "./../actions";
@@ -48,12 +50,19 @@ class QuestionDetail extends React.Component {
 
     const qID = this.props.match.params.id;
     const question = this.props.questions.questions[`${qID}`];
+    const userWhoPostedQuestion = this.props.users[question.author] ;
     const disabled = this.state.value === "" ? true : false;
 
     if (this.props.resOrQues === "Question") {
       return (
         <Fragment>
+          <Image
+            size="small"
+            src={userWhoPostedQuestion.avatarURL}
+            
+          />
           <Header as="h4">Would you rather</Header>
+
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
               <Radio
