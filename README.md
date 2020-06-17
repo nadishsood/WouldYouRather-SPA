@@ -4,7 +4,7 @@ Would You Rather is a web app that lets user play the *'Would You Rather?"* game
 ask and answer questions, see which questions haven't been answered, vote on questions as answers, see what 
 other people voted, post new questions, and see the ranking of users on the leaderboard. 
 
-This was the second project towards the completion of my ***Udacity React Nanodegree***.  My objectives/learnnings were the following: 
+This was the second project towards the completion of my ***Udacity React Nanodegree***.  My objectives/learnings were the following: 
 
  1. Understanding of **React** and **Redux**, **React-Router** and **Redux-Thunk**.
  2. Improving predictability of application state. 
