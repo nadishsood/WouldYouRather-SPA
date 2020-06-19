@@ -92,8 +92,3 @@ export default connect(mapStateToProps, {
 })(Home);
 
 
-//get all the questions
-//seperate them into answered and unanswered 
-//in each category sort them in most recently created first
-
-
