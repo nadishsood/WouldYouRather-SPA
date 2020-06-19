@@ -9,7 +9,7 @@ import {
   SET_RES_OR_QUESTION
 } from "./types";
 
-import * as server from "./../db/_DATA";
+import * as server from "../database/_DATA";
 
 
 export const signIn = (user, redirectTo) =>{
