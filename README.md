@@ -1,68 +1,66 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Would You Rather
 
-## Available Scripts
+Would You Rather is a web app that lets user play the *'Would You Rather?"* game. The app allows users to 
+ask and answer questions, see which questions haven't been answered, vote on questions as answers, see what 
+other people voted, post new questions, and see the ranking of users on the leaderboard. 
 
-In the project directory, you can run:
+This was the second project towards the completion of my ***Udacity React Nanodegree***.  My objectives/learnings were the following: 
 
-### `yarn start`
+ 1. Understanding of **React** and **Redux**, **React-Router** and **Redux-Thunk**.
+ 2. Improving predictability of application state. 
+ 3. Establish strict rules for gettting, listening, and updating the store.
+ 4. Identify what state should live inside of Redux and what state should live inside React components. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project is built using *React* and *Redux* and other supporting libraries like *React-Router*, *Redux-Thunk*, *Semantic-UI* etc. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+### Installation
+Clone the project onto your local directory and run the following commands from the root directory: 
+```
+$ npm install
+$ npm start
+```
+This website can then be visited on http://localhost:3000
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### App functionality
 
-### `yarn build`
+The person using the application has a way of impersonating/logging in as an existing user. Once the user logs in, the home page is shown.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We always want to make sure we know who the logged in user is, so information about the logged in user appears on the page. If someone tries to navigate anywhere by entering the address in the address bar, the user is asked to sign in and then the requested page is shown. The application allows the user to log out and log back in.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Once the user logs in, the user is able to toggle between his/her answered and unanswered polls on the home page, which is located at the root. The polls in both categories are arranged from the most recently created (top) to the least recently created (bottom). The unanswered questions are shown by default, and the name of the logged in user is visible on the page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+What would be the point of seeing answered and unanswered polling questions if we couldn’t actually vote or see the results? Each polling question links to the details of that poll. The details of each poll is available at  `questions/:question_id`.
 
-### `yarn eject`
+When a poll is clicked on the home page, the following is shown:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1.  Text “Would You Rather”;
+2.  Avatar of the user who posted the polling question; and
+3.  Two options.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For answered polls, each of the two options contains the following:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1.  Text of the option;
+2.  Number of people who voted for that option; and
+3.  Percentage of people who voted for that option.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The option selected by the logged-in user is clearly marked.
 
-## Learn More
+Since we want to make sure our application creates a good user experience, the application shows a 404 page if the user is trying to access a poll that does not exist. (Please keep in mind that newly created polls will not be accessible at their url because of the way the backend is set up in this application.) A navigation bar helos user navigate through the app. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+So what happens when someone votes in a poll? Upon voting in a poll, all of the information of an answered poll is displayed. The user’s response is recorded and clearly visible on the poll details page. Users can only vote once per poll; they shouldn’t be allowed to change their answer after they’ve voted -- no cheating allowed! When the user comes back to the home page, the polling question appears in the “Answered” column.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+It would be no fun to vote in polls if we couldn’t post our own questions! The form for posting new polling questions is available at the  `/add`  route. The application shows the text “Would You Rather” and has a form for creating two options. Upon submitting the form, a new poll is created, the user is taken to the home page, and the new polling question appears in the correct category on the home page.
 
-### Code Splitting
+But how can we know how many questions each user has asked and answered? The application has a leaderboard that’s available at the  `/leaderboard`  route. Each entry on the leaderboard contains the following:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+1.  User’s name;
+2.  User’s picture;
+3.  Number of questions the user asked; and
+4.  Number of questions the user answered
 
-### Analyzing the Bundle Size
+Users are ordered in descending order based on the sum of the number of questions they’ve asked and the number of questions they’ve answered. The more questions you ask and answer, the higher up you move.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+The user is able to navigate to the leaderboard, to a specific question, and to the form that allows the user to create a new poll. To make sure we’re showing the data that is relevant to  _the user_, the application requires the user to be signed in order to access those pages.
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#### Thanks for visiting. 
