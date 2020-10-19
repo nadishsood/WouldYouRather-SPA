@@ -22,6 +22,9 @@ const renderDropdownList = ({ input, data, valueField, textField }) => (
 class Login extends React.Component{
 
   onSubmit=(formValue)=>{
+      if(!this.props.location.state.from.pathname){
+        const redirectTo = "/"
+      }
       const redirectTo= this.props.location.state.from.pathname;
       this.props.signIn(formValue.user, redirectTo);
     }
