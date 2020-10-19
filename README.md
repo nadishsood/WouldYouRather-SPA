@@ -1,5 +1,5 @@
 # Would You Rather
-![Project image](https://ibb.co/6NX8HM4)
+![Project image](https://i.ibb.co/3kRvp30/Laptops-1.png)
 
 Would You Rather is a web app that lets user play the *'Would You Rather?"* game. The app allows users to 
 ask and answer questions, see which questions haven't been answered, vote on questions as answers, see what 
